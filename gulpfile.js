@@ -12,9 +12,15 @@ var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync');
+var livereload = require('gulp-livereload');
 // var mocha = require('gulp-mocha');
 // var karma = require('karma').server;
 // var istanbul = require('gulp-istanbul');
+
+// Live reload business.
+gulp.task('reload', function () {
+    livereload.reload();
+});
 
 // Development tasks
 
@@ -84,10 +90,11 @@ gulp.task('build', function () {
 
 gulp.task('default', function () {
 
+  livereload.listen();
   gulp.start('build');
 
   gulp.watch('server/**/*.js', browserSync.reload);
-  gulp.watch('app/scss/**/*.scss', ['sass']); 
+  gulp.watch('app/scss/**/*.scss', ['buildCSS']); 
   gulp.watch('app/js/**/*.js', ['buildJS', browserSync.reload]); 
   gulp.watch(['app/**/*.html', 'server/app/views/*.html'], browserSync.reload); 
 

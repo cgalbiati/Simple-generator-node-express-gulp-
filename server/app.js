@@ -31,8 +31,10 @@ app.use(function (req, res, next) {
 });
 
 //make static routes for files in public and node_modules
-app.use(express.static(path.join(__dirname, 'public')));  
 app.use(express.static(path.join(__dirname, '../node_modules')));
+app.use(express.static(path.join(__dirname, '../public')));  
+app.use(express.static(path.join(__dirname, '../images')));  
+
 
 //static route to index
 var pathToIndex = path.join(__dirname, '../app', 'views', 'index.html');
@@ -43,8 +45,7 @@ app.get('/', function(req, res, next){
 //make static routes for other page routes
 ['/users'].forEach(function (route) {
   app.get(route, function (req, res, next) {
-  	route = route + '.html'
-  	var pathToRoute = path.join(__dirname, '../app', 'views', route);
+  	var pathToRoute = path.join(__dirname, '../app', 'views', route+'.html');
     res.sendFile(pathToRoute);
   });
 });
