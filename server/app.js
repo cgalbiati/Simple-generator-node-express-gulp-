@@ -33,6 +33,8 @@ app.use(function (req, res, next) {
 //make static routes for files in public and node_modules
 app.use(express.static(path.join(__dirname, '../node_modules')));
 app.use(express.static(path.join(__dirname, '../browser/public')));  
+app.use(express.static(path.join(__dirname, '../browser/build')));
+
 
 //static route to index
 var pathToIndex = path.join(__dirname, '../browser', 'public', 'views', 'index.html');
