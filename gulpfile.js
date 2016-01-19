@@ -6,16 +6,15 @@ var gulp = require('gulp');
 var runSeq = require('run-sequence');
 var plumber = require('gulp-plumber');
 var concat = require('gulp-concat');
-var rename = require('gulp-rename');
 var sass = require('gulp-sass');
 var minifyCSS = require('gulp-minify-css');
 var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
-var eslint = require('gulp-eslint');
-var mocha = require('gulp-mocha');
-var karma = require('karma').server;
-var istanbul = require('gulp-istanbul');
+var browserSync = require('browser-sync');
+// var mocha = require('gulp-mocha');
+// var karma = require('karma').server;
+// var istanbul = require('gulp-istanbul');
 
 // Development tasks
 
@@ -83,13 +82,13 @@ gulp.task('build', function () {
     }
 });
 
-gulp.task('default', [browserSync, 'sass'], function () {
+gulp.task('default', function () {
 
   gulp.start('build');
 
   gulp.watch('server/**/*.js', browserSync.reload);
   gulp.watch('app/scss/**/*.scss', ['sass']); 
-  gulp.watch('app/js/**/*.js', [buildJs, browserSync.reload]); 
+  gulp.watch('app/js/**/*.js', ['buildJS', browserSync.reload]); 
   gulp.watch(['app/**/*.html', 'server/app/views/*.html'], browserSync.reload); 
 
 

@@ -1,3 +1,5 @@
 node_modules
 app/public
 npm-debug.log
+.DS_Store
+coverage
