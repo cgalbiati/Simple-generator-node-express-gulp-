@@ -25,21 +25,21 @@ gulp.task('reload', function () {
 // Development tasks
 
 gulp.task('buildCSS', function(){
-  return gulp.src('app/scss/*.scss')
+  return gulp.src('browser/scss/*.scss')
     .pipe(sass({
             errLogToConsole: true
         })) 
-    .pipe(gulp.dest('app/public'))
+    .pipe(gulp.dest('browser/public'))
 });
 
 gulp.task('buildJS', function () {
-    return gulp.src(['./browser/js/app.js', './browser/js/**/*.js'])
+    return gulp.src(['./browser/js/**/*.js'])
         .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(concat('main.js'))
         .pipe(babel())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./public'));
+        .pipe(gulp.dest('./build'));
 });
 
 // // Live reload business.
@@ -58,14 +58,14 @@ gulp.task('buildJS', function () {
 // --------------------------------------------------------------
 
 gulp.task('buildCSSProduction', function () {
-    return gulp.src('app/scss/*.scss')
+    return gulp.src('browser/scss/*.scss')
         .pipe(sass())
         .pipe(minifyCSS())
         .pipe(gulp.dest('./public'))
 });
 
 gulp.task('buildJSProduction', function () {
-    return gulp.src(['./browser/js/app.js', './browser/js/**/*.js'])
+    return gulp.src(['./browser/js/browser.js', './browser/js/**/*.js'])
         .pipe(concat('main.js'))
         .pipe(babel())
         .pipe(ngAnnotate())
@@ -94,9 +94,9 @@ gulp.task('default', function () {
   gulp.start('build');
 
   gulp.watch('server/**/*.js', browserSync.reload);
-  gulp.watch('app/scss/**/*.scss', ['buildCSS']); 
-  gulp.watch('app/js/**/*.js', ['buildJS', browserSync.reload]); 
-  gulp.watch(['app/**/*.html', 'server/app/views/*.html'], browserSync.reload); 
+  gulp.watch('browser/scss/**/*.scss', ['buildCSS']); 
+  gulp.watch('browser/js/**/*.js', ['buildJS', browserSync.reload]); 
+  gulp.watch(['browser/**/*.html', 'server/browser/views/*.html'], browserSync.reload); 
 
 
     // gulp.watch('browser/js/**', function () {

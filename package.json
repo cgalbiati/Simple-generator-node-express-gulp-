@@ -1,14 +1,17 @@
 {
   "name": "generator",
   "version": "1.0.0",
-  "description": "generator for node, angular, postgres",
+  "description": "generator for node, express, gulp",
   "main": "main.js",
   "scripts": {
-    "test": "npm start"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --watch server -e js,html server/start.js",
+    "postinstall": "gulp build"
   },
   "author": "Chandra Galbiati",
   "license": "ISC",
   "dependencies": {
+    "babel": "^6.3.26",
     "body-parser": "^1.14.2",
     "chalk": "^1.1.1",
     "cookie-parser": "^1.4.1",
